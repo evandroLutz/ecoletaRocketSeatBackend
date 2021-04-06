@@ -65,29 +65,39 @@ class PointsController {
             uf
         }
 
-        const insertedIds = await trx('points').insert(point);
+      
 
-        const point_id = insertedIds[0];
+        try {
+            const insertedIds = await trx('points').insert(point);
+            const point_id = insertedIds[0];
 
-        console.log(point_id);
+            const pointItems = items.map((item_id: number) => {
+                return {
+    
+                    item_id,
+                    point_id,
+                };
+            })
+        
+            await trx('point_items').insert(pointItems);
 
-        const pointItems = items.map((item_id: number) => {
-            return {
+            await trx.commit();
+    
+            return response.json({ 
+                id : point_id,
+                ...point,
+    
+            });
+          } catch {
+            
+            return response.json({ 
+               error: 'não registrado'    
+            });
+          }
 
-                item_id,
-                point_id,
-            };
-        })
+      
 
-        await trx('point_items').insert(pointItems);
-
-        await trx.commit();
-
-        return response.json({ 
-            id : point_id,
-            ...point,
-
-        });
+     
     }
 }
 
