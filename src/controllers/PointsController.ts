@@ -2,6 +2,10 @@ import { Request, Response } from 'express';
 
 import knex from '../database/connection';
 
+import { isValidName } from '../services/nameValidator';
+
+import { isValidEmail } from '../services/emailValidator';
+
 class PointsController {
     async index(request: Request, response: Response) {
         const { city, uf, items } = request.query;
@@ -52,6 +56,10 @@ class PointsController {
             items
         } = request.body;
 
+        if(!isValidName(name) || !isValidEmail(email)){
+            return;
+        }
+
         const trx = await knex.transaction();
 
         const point = {
@@ -91,12 +99,9 @@ class PointsController {
           } catch {
             
             return response.json({ 
-               error: 'não registrado'    
+               error: 'requisição incompleta'    
             });
           }
-
-      
-
      
     }
 }
