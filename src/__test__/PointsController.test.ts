@@ -1,6 +1,23 @@
 import request from 'supertest';
 
-import { app } from '../server.point.mock';
+import express from 'express';
+import routes from '../routes';
+import cors from 'cors';
+
+import path from 'path';
+
+const app = express();
+
+app.use(cors());
+
+app.use(express.json());
+
+app.use(routes);
+
+app.use('/uploads', express.static(path.resolve(__dirname,'..', 'uploads' )));
+
+
+let server = app.listen(3444);
 
 describe('POST /users', () => {
     it('should responds with json', (done) => {
@@ -21,6 +38,7 @@ describe('POST /users', () => {
           if (err) return done(err);
           return done();
         });
+        server.close();
     });
 });
 
@@ -43,7 +61,7 @@ describe('POST /users', () => {
           if (err) return done(err);
           return done();
         });
-        
+        server.close();
     });
 });
 
@@ -57,7 +75,8 @@ describe('POST /users', () => {
         })
         .expect({
            error: 'requisição incompleta'
-          }, done);        
+          }, done);
+        server.close();        
     });
 });
 
