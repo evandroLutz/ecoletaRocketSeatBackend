@@ -5,7 +5,6 @@ import knex from '../database/connection';
 import { isValidName } from '../services/nameValidator';
 
 import { isValidEmail } from '../services/emailValidator';
-
 class PointsController {
     async index(request: Request, response: Response) {
         const { city, uf, items } = request.query;
