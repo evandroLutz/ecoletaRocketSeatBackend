@@ -21,7 +21,6 @@ describe('POST /users', () => {
           if (err) return done(err);
           return done();
         });
-        
     });
 });
 
@@ -54,9 +53,10 @@ describe('POST /users', () => {
         .post('/points')
         .send({ 
             name: 'teste',
+            email: 'teste@teste.com.br',
         })
-        .expect(200, {
-           error: 'não registrado'
+        .expect({
+           error: 'requisição incompleta'
           }, done);        
     });
 });
