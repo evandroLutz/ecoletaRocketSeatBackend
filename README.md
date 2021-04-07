@@ -10,9 +10,9 @@
 
 ## PointsController.test.ts testa o módulo controller PointsController.ts
 
-- should responds with json - testa se o envio correto de dados retorna um JSON
-- should responds with status 200 - testa se o envio correto de dados retorna um JSON status code 200
-- should return message não registrado - testa se o envio INCOMPLETO de dados retorna um JSON com a mensagem "não registrado"
+- should responds with json - testa se o envio correto de dados retorna um JSON.
+- should responds with status 200 - testa se o envio correto de dados retorna um JSON status code 200.
+- should return message não registrado - testa se o envio INCOMPLETO de dados retorna um JSON com a mensagem "não registrado".
   
 ## isValidEmail.test.ts testa diretamente a função isValidEmail implementada na rota PointsController
 
