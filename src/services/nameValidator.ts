@@ -1,4 +1,3 @@
-export function isValidName(name: String): Boolean{
-    
-    return name.length > 1;
+export function isValidName(name: string): boolean {
+  return name.length > 1;
 }
